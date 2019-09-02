@@ -1,13 +1,13 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {MediaProvider} from './contexts/MediaContext';
-import Home from './views/Home';
+import Nav from './navigators/Navigator';
 
 
 const App = () => {
   return (
     <MediaProvider>
-      <Home />
+      <Nav />
     </MediaProvider>
   );
 };

@@ -10,14 +10,14 @@ const TabNavigator = createBottomTabNavigator(
     {
         Home: {
             screen: Home,
-            navigatorOptions: {
+            navigationOptions: {
                 title: 'Home',
             },
         },
 
         Profile: {
             screen: Profile,
-            navigatorOptions: {
+            navigationOptions: {
                 title: 'Profile',
             },
         },

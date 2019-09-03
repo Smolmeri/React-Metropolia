@@ -26,7 +26,7 @@ const List = (props) => {
   return (
     <FlatList
       data={media}
-      renderItem={({item}) => <ListItem singleMedia={item} />}
+      renderItem={({item}) => <ListItem navigation={props.navigation} singleMedia={item} />}
       keyExtractor={(item, index) => index.toString()}
     />
   );

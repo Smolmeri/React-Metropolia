@@ -7,10 +7,11 @@ import {
 import List from '../components/List';
 
 
-const Home = () => {
+const Home = (props) => {
+  const {navigation} = props;
   return (
       <SafeAreaView style={styles.container}>
-        <List />
+        <List navigation={navigation}/>
       </SafeAreaView>
   );
 };

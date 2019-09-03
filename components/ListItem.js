@@ -22,7 +22,14 @@ const ListItem = (props) => {
   const tn = getThumbnail(props.singleMedia.file_id);
   console.log('thumbnails', tn);
   return (
-    <TouchableOpacity style={styles.row}>
+    <TouchableOpacity style={styles.row}
+      onPress={
+        () => {
+          props.navigation.navigate('Single', { image: props.singleMedia.filename, title: props.singleMedia.title, desc: props.singleMedia.description });
+          console.log(props.singleMedia);
+        }
+      }
+      >
       <View style={styles.imagebox}>
         {tn && <Image
           style={styles.image}

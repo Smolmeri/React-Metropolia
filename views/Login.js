@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, Button, AsyncStorage } from 'react-native';
+import FormTextInput from '../components/FormTextInput';
 
 const userData = {
     username: 'tomppa101',
@@ -24,7 +25,15 @@ const Login = (props) => {
     };
     return (
         <View style={styles.container}>
-            <Text>Login</Text>
+            <FormTextInput
+                autoCapitalize='none'
+                placeholder='username'
+            />
+            <FormTextInput
+                autoCapitalize='none'
+                placeholder='password'
+                secureTextEntry={true}
+            />
             <Button title="Sign in" onPress={
                 () => {
                     signInAsync('http://media.mw.metropolia.fi/wbma/login', userData);

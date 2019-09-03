@@ -6,10 +6,10 @@ const getThumbnail = (url) => {
   console.log('urli', url);
   const [thumbnails, setThumbnails] = useState({});
   async function fetchUrl() {
-    console.log('fetsurl');
+    // console.log('fetsurl');
     const response = await fetch('http://media.mw.metropolia.fi/wbma/media/' + url);
     const json = await response.json();
-    console.log('json', json);
+    // console.log('json', json);
     setThumbnails(json.thumbnails);
   }
   useEffect(() => {
@@ -20,13 +20,12 @@ const getThumbnail = (url) => {
 
 const ListItem = (props) => {
   const tn = getThumbnail(props.singleMedia.file_id);
-  console.log('thumbnails', tn);
+  // console.log('thumbnails', tn);
   return (
     <TouchableOpacity style={styles.row}
       onPress={
         () => {
           props.navigation.navigate('Single', { image: props.singleMedia.filename, title: props.singleMedia.title, desc: props.singleMedia.description });
-          console.log(props.singleMedia);
         }
       }
       >

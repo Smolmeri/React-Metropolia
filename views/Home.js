@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import React from 'react';
 import {
+  StyleSheet,
   SafeAreaView,
 } from 'react-native';
 import List from '../components/List';
@@ -13,11 +14,18 @@ const Home = (props) => {
   const { getUserFromToken } = mediaAPI();
   getUserFromToken();
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <List navigation={navigation}></List>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 10,
+  },
+});
 
 Home.propTypes = {
   navigation: PropTypes.object,

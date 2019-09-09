@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {
-  StyleSheet,
   SafeAreaView,
   Text,
   Button,
@@ -24,7 +23,7 @@ const Profile = (props) => {
     props.navigation.navigate('Auth');
   };
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView>
       {user &&
         <Text>{user.username}</Text>
       }
@@ -33,16 +32,6 @@ const Profile = (props) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 40,
-  },
-});
 
 Profile.propTypes = {
   navigation: PropTypes.object,

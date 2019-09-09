@@ -4,9 +4,7 @@ import {
     AsyncStorage,
     StatusBar,
     View,
-    Text,
 } from 'react-native';
-
 
 const bootstrapAsync = async (props) => {
     async function getToken() {

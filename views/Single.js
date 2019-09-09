@@ -1,38 +1,40 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
-import { vw, vh } from 'react-native-expo-viewport-units';
+import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import PropTypes from 'prop-types';
+import AImage from '../components/AsyncImage';
 
 const Single = (props) => {
-    const { navigation } = props;
-    const image = navigation.getParam('image');
-    const title = navigation.getParam('title');
-    const desc = navigation.getParam('desc');
-        return (
-        <View style={styles.container}>
-            <Image style={styles.image} source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + image}}></Image>
-            <Text>{title}</Text>
-            <Text>{desc}</Text>
-        </View>
-    );
+  const {navigation} = props;
+  console.log('Single navi', navigation.state);
+  const file = navigation.state.params.file;
+  return (
+    <SafeAreaView style={styles.container}>
+      <Text>{file.title}</Text>
+      <AImage
+        source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename}}
+        style={{
+          borderRadius: 50,
+          width: '100%',
+          height: '90%',
+        }}
+        spinnerColor='#b3e5fc'
+      />
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 20,
-        paddingBottom: 20,
-        
-    },
-    image: {
-        flex: 1,
-        borderRadius: 16,
-        height: vh(50),
-        width: vw(100),
-        margin: 10,
-      },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
+
+Single.propTypes = {
+  navigation: PropTypes.object,
+  file: PropTypes.object,
+};
 
 export default Single;

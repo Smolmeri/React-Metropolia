@@ -1,62 +1,58 @@
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {createAppContainer, createSwitchNavigator} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../views/Home';
-import Profile from '../views/Profiles';
+import Profile from '../views/Profile';
 import Single from '../views/Single';
 import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
-
 
 const TabNavigator = createBottomTabNavigator(
     {
-        Home: {
-            screen: Home,
-            navigationOptions: {
-                title: 'Home',
-            },
+      Home: {
+        screen: Home,
+        navigationOptions: {
+          title: 'Home',
         },
-
-        Profile: {
-            screen: Profile,
-            navigationOptions: {
-                title: 'Profile',
-            },
+      },
+      Profile: {
+        screen: Profile,
+        navigationOptions: {
+          title: 'Profile',
         },
+      },
     },
     {
-        initialRouteName: 'Home',
+      initialRouteName: 'Home',
     }
 );
 
 const StackNavigator = createStackNavigator(
     {
-        Home: {
-            screen: TabNavigator,
-            navigationOptions: {
-                header: null,
-            },
+      Home: {
+        screen: TabNavigator,
+        navigationOptions: {
+          header: null, // this will hide the header
         },
-        Single: {
-            screen: Single,
-        },
-        Logout: {
-            screen: Login,
-        },
+      },
+      Single: {
+        screen: Single,
+      },
+      Logout: {
+        screen: Login,
+      },
     },
 );
 
 const Navigator = createSwitchNavigator(
     {
-        AuthLoading: AuthLoading,
-        App: StackNavigator,
-        Auth: Login,
+      AuthLoading: AuthLoading,
+      App: StackNavigator,
+      Auth: Login,
     },
     {
-        initialRouteName: 'AuthLoading',
+      initialRouteName: 'AuthLoading',
     }
 );
 
-const Nav = createAppContainer(Navigator);
-
-export default Nav;
+export default createAppContainer(Navigator);

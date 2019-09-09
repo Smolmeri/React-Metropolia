@@ -25,7 +25,7 @@ const ListItem = (props) => {
     <TouchableOpacity style={styles.row}
       onPress={
         () => {
-          props.navigation.navigate('Single', { image: props.singleMedia.filename, title: props.singleMedia.title, desc: props.singleMedia.description });
+          props.navigation.navigate('Single', { file: props.singleMedia });
         }
       }
       >

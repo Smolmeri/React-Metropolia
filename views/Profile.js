@@ -9,6 +9,7 @@ import {
 import PropTypes from 'prop-types';
 
 const Profile = (props) => {
+  console.log('profile props', props);
   const [user, setUser] = useState({});
   const getUser = async () => {
     const user = await AsyncStorage.getItem('user');

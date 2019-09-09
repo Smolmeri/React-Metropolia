@@ -10,8 +10,8 @@ import mediaAPI from '../hooks/ApiHooks';
 
 
 const Home = (props) => {
-  const {navigation} = props;
-  const {getUserFromToken} = mediaAPI();
+  const { navigation } = props;
+  const { getUserFromToken } = mediaAPI();
   getUserFromToken();
   return (
     <SafeAreaView style={styles.container}>

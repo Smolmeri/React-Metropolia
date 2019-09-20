@@ -1,48 +1,57 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useContext } from 'react';
 import {
-  StyleSheet,
-  SafeAreaView,
-  Text,
-  Button,
   AsyncStorage,
 } from 'react-native';
 import PropTypes from 'prop-types';
+import { Content, Card, CardItem, Left, Icon, Body, Image, Structure, Text, Button } from 'native-base';
+import { MediaContext } from '../contexts/MediaContext';
+import mediaAPI from '../hooks/ApiHooks';
 
 const Profile = (props) => {
-  console.log('profile props', props);
-  const [user, setUser] = useState({});
-  const getUser = async () => {
-    const user = await AsyncStorage.getItem('user');
-    setUser(JSON.parse(user));
-  };
-  useEffect(() => {
-    getUser();
-  }, []);
+  
+  const { user } = useContext(MediaContext).user;
+  const [avatar, setAvatar] = useState(undefined);
+  console.log('avataari', avatar);
+  const { getAvatar } = mediaAPI();
+  getAvatar().then((result) => {
+    setAvatar(result);
+  })
+
   console.log('ret user', user);
   const signOutAsync = async () => {
     await AsyncStorage.clear();
     props.navigation.navigate('Auth');
   };
+
   return (
-    <SafeAreaView style={styles.container}>
-      {user &&
-        <Text>{user.username}</Text>
-      }
-      <Button title="Logout!" onPress={signOutAsync}
-      />
-    </SafeAreaView>
+    <Structure>
+      <Content>
+        <Card>
+          <CardItem>
+            <Left>
+              <Icon name='ios-person' />
+              <Body>
+                <Text>{user.username}</Text>
+                <Text note>{user.email}</Text>
+              </Body>
+            </Left>
+          </CardItem>
+          <CardItem cardBody>
+            {avatar &&
+              <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}} />
+            }
+          </CardItem>
+
+          <CardItem>
+            <Button transparent onPress={signOutAsync}>
+              <Icon name='ios-log-out' />
+            </Button>
+          </CardItem>
+        </Card>
+      </Content>
+    </Structure>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 40,
-  },
-});
 
 Profile.propTypes = {
   navigation: PropTypes.object,

@@ -63,13 +63,13 @@ const Upload = (props) => {
                     onChangeText={handleDescriptionChange}
                 />
 
-                <Button block
+                <Button block style={{margin: 5, padding: 4}}
                     onPress={pickImage}
                 >
                     <Text>Choose File</Text>
                 </Button>
 
-                <Button block
+                <Button block  style={{margin: 5, padding: 4}}
                     onPress={() => {
                         handleUpload(file);
                     }}
@@ -77,7 +77,7 @@ const Upload = (props) => {
                     <Text>Upload File</Text>
                 </Button>
 
-                <Button block>
+                <Button block style={{margin: 5, padding: 4}}>
                     <Text>Reset</Text>
                 </Button>
             </Form>

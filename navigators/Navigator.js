@@ -1,17 +1,19 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {Icon} from 'native-base';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../views/Home';
 import Profile from '../views/Profile';
 import Single from '../views/Single';
+import Upload from '../views/Upload';
 import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
 
 const TabNavigator = createBottomTabNavigator(
   {
     Home,
+    Upload,
     Profile,
   },
   {
@@ -20,9 +22,11 @@ const TabNavigator = createBottomTabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         if (routeName === 'Home') {
-          iconName = "ios-home";
+          iconName = "home";
         } else if (routeName === 'Profile') {
-          iconName = "ios-person";
+          iconName = "person";
+        } else if (routeName === 'Upload') {
+          iconName = 'add';
         }
 
         // You can return any component that you like here!

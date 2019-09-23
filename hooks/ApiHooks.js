@@ -76,16 +76,14 @@ const mediaAPI = () => {
     }
   };
 
-  /*
-  const getUserFromToken = async () => {
-    useEffect(() => {
-      fetchGetUrl(apiUrl + 'users/user').then((json) => {
-        console.log('getUserTOken', json);
-        AsyncStorage.setItem('user', JSON.stringify(json));
-      });
-    }, []);
-  };
-  */
+  // const getUserFromToken = async () => {
+  //   useEffect(() => {
+  //     fetchGetUrl(apiUrl + 'users/user').then((json) => {
+  //       console.log('getUserTOken', json);
+  //       AsyncStorage.setItem('user', JSON.stringify(json));
+  //     });
+  //   }, []);
+  // };
 
   const userToContext = async () => {
     const {user, setUser} = useContext(MediaContext);
@@ -138,6 +136,31 @@ const mediaAPI = () => {
     }
   };
 
+  const fetchUploadUrl = async (url, data) => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    console.log('fetchUploadUrl', url, data, userToken);
+    const response = await fetch(apiUrl + url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'multipart/form-data',
+        'x-access-token': userToken,
+      },
+      body: data,
+    });
+    let json = {error: 'oops'};
+    if (response.ok) {
+      json = await response.json();
+      console.log('fetchUploadUrl json', json);
+    }
+    return json;
+  };
+
+  const uploadFile = async (formData) => {
+    return fetchUploadUrl('media', formData).then((json) => {
+      return json;
+    });
+  };
+
 
   return {
     getAllMedia,
@@ -148,6 +171,7 @@ const mediaAPI = () => {
     getAvatar,
     getUserInfo,
     checkAvailable,
+    uploadFile,
   };
 };
 

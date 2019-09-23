@@ -1,45 +1,46 @@
 import React from 'react';
-// import { SafeAreaView, Text, View } from 'react-native';
 import PropTypes from 'prop-types';
 import AImage from '../components/AsyncImage';
-import { Container, Text, Thumbnail, Content } from 'native-base';
+import {Container, Content, Text, Card, CardItem, H2, Body} from 'native-base';
+import mediaAPI from '../hooks/ApiHooks';
 
 const Single = (props) => {
-  const { navigation } = props;
-  console.log('Single navi', navigation.state);
+  const {navigation} = props;
+  console.log('Singel navi', navigation.state);
   const file = navigation.state.params.file;
+  const {getUserInfo} = mediaAPI();
   return (
-    // <SafeAreaView>
-    //   <View>
-    //     <Text>{file.title}</Text>
-    //     <AImage
-    //       source={{ uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename }}
-    //       style={{
-    //         borderRadius: 50,
-    //         width: '100%',
-    //         height: '90%',
-    //       }}
-    //       spinnerColor='#b3e5fc'
-    //     />
-    //     <Text>{file.description}</Text>
-    //   </View>
-    // </SafeAreaView>
-
     <Container>
-      <Text>{file.title}</Text>
-      {/* <Thumbnail source={{ uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename }} style={{ borderRadius: 50, borderColor: 'black 1px solid', width: '100%', height: '90%', }} /> */}
-      <AImage
-        source={{ uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename }}
-        style={{
-          borderRadius: 50,
-          width: '100%',
-          height: '90%',
-        }}
-      />
-      <Text>{file.description}</Text>
+      <Content>
+        <Card>
+          <CardItem>
+            <Body>
+              <H2>{file.title}</H2>
+              <Text note>by: {getUserInfo(file.user_id).username}</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <AImage
+                source={{uri: 'http://media.mw.metropolia.fi/wbma/uploads/' + file.filename}}
+                style={{
+                  borderRadius: 50,
+                  width: '100%',
+                  height: 500,
+                }}
+                spinnerColor='#b3e5fc'
+              />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Text>{file.description}</Text>
+          </CardItem>
+        </Card>
+      </Content>
     </Container>
   );
 };
+
 
 Single.propTypes = {
   navigation: PropTypes.object,

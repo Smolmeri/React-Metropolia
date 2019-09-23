@@ -4,6 +4,7 @@ import mediaAPI from './ApiHooks';
 
 const {checkAvailable} = mediaAPI();
 
+// Pre validated in validate.js -- use in own documentation in project
 const constraints = {
   username: {
     presence: {
@@ -38,7 +39,7 @@ const constraints = {
   },
 };
 
-const validator = (field, value) => { // if value is string or object
+const validator = (field, value) => { //value is string or object
   // Creates an object based on the field name and field value
   // e.g. let object = {email: 'email@example.com'}
   let object = {};

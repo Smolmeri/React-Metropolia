@@ -1,55 +1,68 @@
-import React, {useState, useContext } from 'react';
-import {
-  AsyncStorage,
-} from 'react-native';
+import React, {useContext} from 'react';
+import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
-import { Content, Card, CardItem, Left, Icon, Body, Image, Structure, Text, Button } from 'native-base';
-import { MediaContext } from '../contexts/MediaContext';
+import {
+  Icon,
+  Container,
+  Content,
+  Text,
+  Button,
+  Card,
+  CardItem,
+  Left,
+  H2,
+  Body,
+} from 'native-base';
 import mediaAPI from '../hooks/ApiHooks';
+import AImage from '../components/AsyncImage';
+import {MediaContext} from '../contexts/MediaContext';
 
 const Profile = (props) => {
-  
-  const { user } = useContext(MediaContext).user;
-  const [avatar, setAvatar] = useState(undefined);
-  console.log('avataari', avatar);
-  const { getAvatar } = mediaAPI();
-  getAvatar().then((result) => {
-    setAvatar(result);
-  })
-
+  const {user} = useContext(MediaContext);
   console.log('ret user', user);
+  const {getAvatar} = mediaAPI();
   const signOutAsync = async () => {
     await AsyncStorage.clear();
     props.navigation.navigate('Auth');
   };
-
   return (
-    <Structure>
+    <Container>
       <Content>
+        {user &&
         <Card>
           <CardItem>
             <Left>
-              <Icon name='ios-person' />
-              <Body>
-                <Text>{user.username}</Text>
-                <Text note>{user.email}</Text>
-              </Body>
+              <H2>{user.username}</H2>
+            </Left>
+            <Body>
+              <Text>{user.full_name}</Text>
+              <Text note>{user.email}</Text>
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <AImage
+                source={{uri: getAvatar(user)}}
+                style={{
+                  borderRadius: 50,
+                  width: '100%',
+                  height: 500,
+                }}
+                spinnerColor='#b3e5fc'
+              />
+            </Body>
+          </CardItem>
+          <CardItem>
+            <Left>
+              <Button onPress={signOutAsync}>
+                <Icon name="log-out" />
+              </Button>
             </Left>
           </CardItem>
-          <CardItem cardBody>
-            {avatar &&
-              <Image source={{uri: avatar}} style={{height: 200, width: null, flex: 1}} />
-            }
-          </CardItem>
-
-          <CardItem>
-            <Button transparent onPress={signOutAsync}>
-              <Icon name='ios-log-out' />
-            </Button>
-          </CardItem>
         </Card>
+        }
       </Content>
-    </Structure>
+    </Container>
   );
 };
 

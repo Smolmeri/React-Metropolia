@@ -1,30 +1,23 @@
 /* eslint-disable max-len */
 import React from 'react';
-import {
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
 import List from '../components/List';
 import PropTypes from 'prop-types';
 import mediaAPI from '../hooks/ApiHooks';
-import { List as BaseList, Container, Header, Title, Button, Left, Icon, Body } from 'native-base';
+import {Container, Content, Header, Title} from 'native-base';
 
 
 const Home = (props) => {
-  const { navigation } = props;
-  const { getUserFromToken } = mediaAPI();
-  getUserFromToken();
-  const { userToContext } = mediaAPI();
-  userToContext().then((user) => {
-    console.log('usercontext', user);
-  });
-
+  const {navigation} = props;
+  const {userToContext} = mediaAPI();
+  userToContext();
   return (
     <Container>
       <Header>
           <Title>Wastic</Title>
       </Header>
-      <List navigation={navigation} />
+      <Content>
+        <List navigation={navigation}></List>
+      </Content>
     </Container>
   );
 };
